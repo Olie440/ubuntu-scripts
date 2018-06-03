@@ -9,7 +9,7 @@ const display_modes = [
         }
     },
     {
-        screen: 'DVI-0',
+        screen: 'DisplayPort-1',
         sound: {
             card: 'HDA ATI SB',
             output: 'iec958-stereo'
@@ -28,7 +28,7 @@ const get_screen_config = (function() {
             const [full_match, display_name, resolution = null] = line.match(display_pattern);
             return { display_name, resolution };
         });
-    
+
     return function (search) {
         if (search) {
             return parsed_config.find(config => config.display_name === search.screen);
@@ -81,7 +81,7 @@ function disable_all_configs() {
 
         execSync(`xrandr --output ${config.screen} --off`);
         execSync(`pactl set-card-profile ${sound_config.system_name} off`);
-        
+
     })
 }
 
